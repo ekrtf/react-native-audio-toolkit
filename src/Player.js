@@ -56,9 +56,9 @@ class Player extends EventEmitter {
     this._playerId = playerId++;
     this._reset();
 
-    const appEventEmitter = Platform.OS === 'ios' ? NativeAppEventEmitter : DeviceEventEmitter;
+    this.appEventEmitter = Platform.OS === 'ios' ? NativeAppEventEmitter : DeviceEventEmitter;
 
-    appEventEmitter.addListener(`RCTAudioPlayerEvent:${this._playerId}`, (payload: Event) => {
+    this.appEventEmitter.addListener(`RCTAudioPlayerEvent:${this._playerId}`, (payload) => {
       this._handleEvent(payload.event, payload.data);
     });
   }
